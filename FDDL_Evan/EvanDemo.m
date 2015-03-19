@@ -2,7 +2,7 @@ close all;
 clear all;
 clc;
 
-%% Dispose Data MCI
+%% Dispose Data of MCI
 addpath('F:\Graduate Design\Database');
 addpath('F:\Graduate Design\Database\ROI');
 load('MCI403_ROI_5tpt');
@@ -14,7 +14,6 @@ pMCI_3 = reshape(pMCI_data(:,3,:),[row,cell]);
 pMCI_4 = reshape(pMCI_data(:,4,:),[row,cell]);
 pMCI_5 = reshape(pMCI_data(:,5,:),[row,cell]);
 
-
 [row,col,cell] = size(sMCI_data);
 sMCI_1 = reshape(sMCI_data(:,1,:),[row,cell]);
 sMCI_2 = reshape(sMCI_data(:,2,:),[row,cell]);
@@ -22,7 +21,6 @@ sMCI_3 = reshape(sMCI_data(:,3,:),[row,cell]);
 sMCI_4 = reshape(sMCI_data(:,4,:),[row,cell]);
 sMCI_5 = reshape(sMCI_data(:,5,:),[row,cell]);
 
-% pMCI_1 = pMCI(:,:,1);sMCI_1 = sMCI(:,:,1);
 datalabel = [ones(1,size(pMCI_1,2)),2.*ones(1,size(sMCI_1,2))];
 data_1 = [pMCI_1,sMCI_1];
 data_1 = data_1(1:4:size(data_1,1),:);
@@ -35,7 +33,7 @@ data_4 = data_4(1:4:size(data_4,1),:);
 data_5 = [pMCI_5,sMCI_5];
 data_5 = data_5(1:4:size(data_5,1),:);
 
-%% Dispose Data AD/NORMAL
+%% Dispose Data of AD/NORMAL
 % addpath('F:\Graduate Design\Database');
 % addpath('F:\Graduate Design\Database\ROI');
 % load('AD198_ROI_5tpt.mat');
@@ -60,14 +58,17 @@ data_5 = data_5(1:4:size(data_5,1),:);
 % datalabel(:,ind) = [];
 % data = data./repmat(sqrt(sum(data.^2)),size(data,1),1);
 
-clear pMCI_data sMCI_data pMCI sMCI row col cell pMCI_1 sMCI_1;
+clear  row col cell 
+clear  pMCI_1 pMCI_2 pMCI_3 pMCI_4 pMCI_5;
+clear  sMCI_1 sMCI_2 sMCI_3 sMCI_4 sMCI_5;
+
 % c = cvpartition(datalabel,'k',10);
 % save('cvpartition','c');
 load cvpartition;
 LAMBDA = [1,0.5,0.1,0.05,0.01,0.005,0.001,0.0005];
 for j = 6:6
     for k = 1:10
-    %     k = 1;%k equals 1 to 10
+        
         Xt = data_1(:,training(c,k));
         Lt = datalabel(:,training(c,k));
         
@@ -99,6 +100,7 @@ for j = 6:6
         
         id = [1:1:size(Xs_1,2)];
         id = kron(id,[1,1,1,1,1]);
+        id_label = Ls_1;
         
         ind = find(sum(Xs,1) == 0);
         Xs(:,ind) = [];
@@ -113,9 +115,10 @@ for j = 6:6
         
         opts.nClass = 2;
         opts.wayInit = 'PCA';
+        opts.atomnums = 93 ;%set the numbers of dictionary atom of each class(edit by Evan)
         opts.lambda1 = 0.005;
         opts.lambda2 = 0.05;
-        opts.nIter = 15;
+        opts.nIter = 15;%15;
         opts.show = true;
         [Dict,Drls,CoefM,CMlabel] = FDDL(Xt,Lt,opts);
 %         filename = strcat('GMNewDict',num2str(k));
@@ -169,6 +172,6 @@ for j = 6:6
 % 
 % %             [ACC(j,k),LABEL,C] = SLEP_LeastR_SparseClassify_Evan1(Dict,Drls,Xs,Ls,lambda);
 % %             [ACC(j,k),LABEL,C] = SLEP_sgLeastR_SparseClassify_Evan1(Dict,Drls,Xs,Ls,lambda);
-            [ACC(j,k),LABEL,C] = SLEP_treeLeastR_SparseClassify_Multime_Evan1(Dict,Drls,Xs,Ls,id,Ls_1,lambda);
+            [ACC(j,k),LABEL,C] = SLEP_treeLeastR_SparseClassify_Multime_Evan1(Dict,Drls,Xs,Ls,id,id_label,lambda);
     end
 end
