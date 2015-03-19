@@ -18,13 +18,15 @@ m   =    size(data,1);
 
 switch lower(wayInit)
     case {'pca'}
-        [D,disc_value,Mean_Image]   =    Eigenface_f(data,nCol-1);
+%         [D,disc_value,Mean_Image]   =    Eigenface_f(data,nCol-1);
+        [D,disc_value,Mean_Image]   =    Eigenface_f(data,atomnums-1);
         D                           =    [D Mean_Image./norm(Mean_Image)];
     case {'random'}
         phi                         =    randn(m, nCol);
         phinorm                     =    sqrt(sum(phi.*phi, 2));
         D                           =    phi ./ repmat(phinorm, 1, nCol);
     case {'adjustable random'}
+%         index                       =    randi(nCol,atomnums);    
         phi                         =    randn(m, atomnums);
         phinorm                     =    sqrt(sum(phi.*phi, 1));
         D                           =    phi ./ repmat(phinorm, m, 1);

@@ -115,7 +115,7 @@ for j = 6:6
         
         opts.nClass = 2;
         opts.wayInit = 'PCA';
-        opts.atomnums = 93 ;%set the numbers of dictionary atom of each class(edit by Evan)
+        opts.atomnums = 10 ;%set the numbers of dictionary atom of each class(edit by Evan)
         opts.lambda1 = 0.005;
         opts.lambda2 = 0.05;
         opts.nIter = 15;%15;
