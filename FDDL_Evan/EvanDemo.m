@@ -115,10 +115,10 @@ for j = 6:6
         
         opts.nClass = 2;
         opts.wayInit = 'PCA';
-        opts.atomnums = 10 ;%set the numbers of dictionary atom of each class(edit by Evan)
+        opts.dictnums = 183 ;%set the numbers of dictionary atom of each class(edit by Evan)
         opts.lambda1 = 0.005;
         opts.lambda2 = 0.05;
-        opts.nIter = 15;%15;
+        opts.nIter = 15;
         opts.show = true;
         [Dict,Drls,CoefM,CMlabel] = FDDL(Xt,Lt,opts);
 %         filename = strcat('GMNewDict',num2str(k));

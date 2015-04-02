@@ -65,7 +65,7 @@ Dict_ini  =  [];
 Dlabel_ini = [];
 for ci = 1:opts.nClass
     cdat          =    TrainDat(:,TrainLabel==ci);
-    dict          =    FDDL_INID(cdat,size(cdat,2),opts.wayInit,opts.atomnums);
+    dict          =    FDDL_INID(cdat,size(cdat,2),opts.wayInit,opts.dictnums);
 %     dict          =    FDDL_INID(cdat,min(size(cdat,1),size(cdat,2)),opts.wayInit,opts.atomnums);%edit by Evan
     Dict_ini      =    [Dict_ini dict];
     Dlabel_ini    =    [Dlabel_ini repmat(ci,[1 size(dict,2)])];
