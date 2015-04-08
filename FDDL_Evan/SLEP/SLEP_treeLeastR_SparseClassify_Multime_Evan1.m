@@ -66,8 +66,10 @@ for i = 1:length(Test_label)
 end
 
 for j = 1:length(unique(id))
+    
     gap1 = sum(Dif(1,find(id == j)));
     gap2 = sum(Dif(2,find(id == j)));
+    
     if gap1 < gap2
         label(j) = 1;
     else

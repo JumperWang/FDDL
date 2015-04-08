@@ -29,8 +29,7 @@ switch lower(wayInit)
 %         index                       =    randi(nCol,atomnums);    
         phi                         =    randn(m, atomnums);
         phinorm                     =    sqrt(sum(phi.*phi, 1));
-        D                           =    phi ./ repmat(phinorm, m, 1);
-        
+        D                           =    phi ./ repmat(phinorm, m, 1);        
     otherwise 
         error{'Unkonw method.'}
 end
