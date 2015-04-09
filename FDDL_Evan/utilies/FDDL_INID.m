@@ -27,9 +27,9 @@ switch lower(wayInit)
         D                           =    phi ./ repmat(phinorm, 1, nCol);
     case {'adjustable random'}
 %         index                       =    randi(nCol,atomnums);    
-        phi                         =    randn(m, atomnums);
-        phinorm                     =    sqrt(sum(phi.*phi, 1));
-        D                           =    phi ./ repmat(phinorm, m, 1);        
+        phi                         =    randn(m, dictnums);
+        phinorm                     =    sqrt(sum(phi.*phi, 2));
+        D                           =    phi ./ repmat(phinorm, 1, dictnums);        
     otherwise 
         error{'Unkonw method.'}
 end

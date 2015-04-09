@@ -37,6 +37,7 @@ opts.nFlag=0;       % without normalization
 %  opts.ind(3,:) contains the corresponding weight (w_j)
 
 % opts.ind=[ [-1,-1,1]', [n1;n2;weight] [1, N1, 1]', [N1+1, N2, 0.84]'];
+%    opts.ind=[ [-1,-1,1]',[1,N1,1.0401/10]',[N1+1,N2,1/10]'];
    opts.ind=[ [-1,-1,1]',[1,N1,1.0401/10]',[N1+1,N2,1/10]'];
 %    opts.ind=[-1,-1,1]';
 

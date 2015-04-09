@@ -66,7 +66,7 @@ clear  sMCI_1 sMCI_2 sMCI_3 sMCI_4 sMCI_5;
 % save('cvpartition','c');
 load cvpartition;
 LAMBDA = [1,0.5,0.1,0.05,0.01,0.005,0.001,0.0005];
-for j = 6:6
+% for j = 6:6
     for k = 1:10
         
         Xt = data_1(:,training(c,k));
@@ -117,8 +117,8 @@ for j = 6:6
 %         opts.wayInit = 'adjustable random';
 %         opts.dictnums = 150 ;%set the numbers of dictionary atom of each class(edit by Evan)
 %         opts.lambda1 = 0.005;
-%         opts.lambda2 = 0.5;%0.05;
-%         opts.nIter = 40;%15;
+%         opts.lambda2 = 0.05;
+%         opts.nIter = 30;%15;
 %         opts.show = true;
 %         [Dict,Drls,CoefM,CMlabel] = FDDL(Xt,Lt,opts);
 %         filename = strcat('GMNewDict',num2str(k));
@@ -165,13 +165,13 @@ for j = 6:6
 % %     
 % %         fprintf('%s%8f\n','reco_rate  =  ',sum(ID==Ls)/(length(Ls)));
 % %         ACC(k) = sum(ID==Ls)/(length(Ls));
-        %% Sparse Classification II
-            filename = strcat('GMNewDict',num2str(k));
-            load(filename);
-            lambda = [LAMBDA(j)];
-% 
-% %             [ACC(j,k),LABEL,C] = SLEP_LeastR_SparseClassify_Evan1(Dict,Drls,Xs,Ls,lambda);
-% %             [ACC(j,k),LABEL,C] = SLEP_sgLeastR_SparseClassify_Evan1(Dict,Drls,Xs,Ls,lambda);
-            [ACC(j,k),LABEL,C] = SLEP_treeLeastR_SparseClassify_Multime_Evan1(Dict,Drls,Xs,Ls,id,id_label,lambda);
-    end
+%         %% Sparse Classification II
+%             filename = strcat('GMNewDict',num2str(k));
+%             load(filename);
+%             lambda = [LAMBDA(j)];
+% % 
+% % %             [ACC(j,k),LABEL,C] = SLEP_LeastR_SparseClassify_Evan1(Dict,Drls,Xs,Ls,lambda);
+% % %             [ACC(j,k),LABEL,C] = SLEP_sgLeastR_SparseClassify_Evan1(Dict,Drls,Xs,Ls,lambda);
+%             [ACC(j,k),LABEL,C] = SLEP_treeLeastR_SparseClassify_Multime_Evan1(Dict,Drls,Xs,Ls,id,id_label,lambda);
+%     end
 end
